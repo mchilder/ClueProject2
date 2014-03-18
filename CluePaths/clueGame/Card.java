@@ -4,4 +4,5 @@ public class Card {
 		ROOM, PERSON, WEAPON
 	};
 	public String name;
+	public CardType type;
 }

@@ -3,13 +3,19 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import clueGame.Card.CardType;
+
 public class ClueGame {
+	public static Solution s;
 	public static List<Player> ComputerPlayers;
 	public static List<String> Weapons;
+	public static List<Card> Cards;
 	public static Player Human;
 	public static Board b;
 	private static String DEFAULT_NAME_FILE = "clueGame/names.txt";
@@ -29,6 +35,13 @@ public class ClueGame {
 		ComputerPlayers = new ArrayList<Player>();
 		Weapons = new ArrayList<String>();
 		b = new Board();
+		
+		try {
+			b.loadConfigFiles();
+		} catch (FileNotFoundException | BadConfigFormatException e1) {
+			e1.printStackTrace();
+		}
+		
 		try{
 			loadPlayerConfig();
 			loadWeaponsConfig();
@@ -65,6 +78,7 @@ public class ClueGame {
 	    }
 	    in.close();
 	}
+	
 	public void loadWeaponsConfig() throws FileNotFoundException {
 		FileReader reader = new FileReader(this.weaponConfigFile);
 	    Scanner in = new Scanner(reader);
@@ -73,5 +87,63 @@ public class ClueGame {
 	    	Weapons.add(next);
 	    }
 	    in.close();
+	}
+	
+	public void loadDeck() {
+		Cards = new ArrayList<Card>();
+		for(String a : Weapons) {
+			Card temp = new Card();
+			temp.name = a;
+			temp.type = CardType.WEAPON;
+			Cards.add(temp);
+		}
+		Map<Character, String> rooms = b.getRooms();
+		for(Character key : rooms.keySet()) {
+			if(key!='X') {
+				Card temp = new Card();
+				temp.name = rooms.get(key);
+				temp.type = CardType.ROOM;
+				Cards.add(temp);
+			}
+		}
+		for(Player a : ComputerPlayers) {
+			Card temp = new Card();
+			temp.name = a.name;
+			temp.type = CardType.PERSON;
+			Cards.add(temp);
+		}
+		Card temp = new Card();
+		temp.name = Human.name;
+		temp.type = CardType.PERSON;
+		Cards.add(temp);
+		Collections.shuffle(Cards);
+	}
+	
+	public void deal() {
+		s = new Solution();
+		Boolean p=false,r=false,w=false;
+		for(Player a : ComputerPlayers)
+			a.myCards = new ArrayList<Card>();
+		Human.myCards = new ArrayList<Card>();
+		
+		int index = 0;
+		for(Card a : Cards) {
+			if(a.type == CardType.ROOM && !r) {
+				s.room = a.name;
+				r = true;
+			} else if(a.type == CardType.WEAPON && !w) {
+				s.weapon = a.name;
+				w = true;
+			} else if(a.type == CardType.PERSON && !p) {
+				s.person = a.name;
+				p = true;
+			} else {
+				if(index%6 == 5)
+					Human.myCards.add(a);
+				else
+					ComputerPlayers.get(index%6).myCards.add(a);
+				index++;
+			}
+		}
 	}
 }
