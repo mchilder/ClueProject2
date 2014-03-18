@@ -45,16 +45,11 @@ public class testCardsAndDeal {
 	
 	@Test
 	public void testDeal() {
-		System.out.println(c.s.person + ", " + c.s.room + ", " + c.s.weapon);
-		
 		// Make sure each player has 3 cards ( ( 21 - 3 ) / 6 )
 		for(Player a : c.ComputerPlayers) {
 			Assert.assertEquals(3, a.myCards.size());
 		}
 		Assert.assertEquals(3, c.Human.myCards.size());
-		
-		
-		
 		
 		// For each computer player check their card against all other dealt cards to ensure only 1 match
 		// This will also assure that the Human doesnt have a card that matches a computer's card
@@ -75,8 +70,8 @@ public class testCardsAndDeal {
 				Assert.assertEquals(1, check);
 			}
 		}
-		
 	}
+	
 	
 	
 
