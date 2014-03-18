@@ -65,7 +65,6 @@ public class ClueGame {
 	    }
 	    in.close();
 	}
-	
 	public void loadWeaponsConfig() throws FileNotFoundException {
 		FileReader reader = new FileReader(this.weaponConfigFile);
 	    Scanner in = new Scanner(reader);
