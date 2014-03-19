@@ -146,4 +146,7 @@ public class ClueGame {
 			}
 		}
 	}
+	public Boolean makeAccusation(Solution check) {
+		return (check.person == s.person && check.weapon == s.weapon && check.room == s.room);
+	}
 }
