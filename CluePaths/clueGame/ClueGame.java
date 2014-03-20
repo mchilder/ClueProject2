@@ -67,6 +67,7 @@ public class ClueGame {
 	    		temp.name = inputs[0];
 	    		temp.color = inputs[1];
 	    		temp.StartingLocation = Integer.parseInt(inputs[2]);
+	    		temp.seenCards = new ArrayList<Card>();
 	    		Human = temp;
 	    	} else {
 	    		temp = new ComputerPlayer();
@@ -152,6 +153,45 @@ public class ClueGame {
 				index++;
 			}
 		}
+	}
+	
+	public Solution makeSuggestion(int index) {
+		Random r = new Random();
+		ArrayList<Card> peopleNotSeen = new ArrayList<Card>();
+		ArrayList<Card> roomsNotSeen = new ArrayList<Card>();
+		ArrayList<Card> weaponsNotSeen = new ArrayList<Card>();
+		
+		for(Card c : Cards) {
+			Boolean seen = false;
+			for(Card c2 : ComputerPlayers.get(index).seenCards) {
+				if(c2.name.equals(c.name))
+					seen = true;
+			}
+			if(!seen) {
+				if(c.type == CardType.PERSON)
+					peopleNotSeen.add(c);
+				if(c.type == CardType.WEAPON)
+					weaponsNotSeen.add(c);
+				if(c.type == CardType.ROOM)
+					roomsNotSeen.add(c);
+			}
+		}
+		Solution s2 = new Solution();
+		if(peopleNotSeen.size() == 1)
+			s2.person = peopleNotSeen.get(0).name;
+		else if(peopleNotSeen.size() > 1)
+			s2.person = peopleNotSeen.get(r.nextInt(peopleNotSeen.size())).name;
+		
+		if(roomsNotSeen.size() == 1)
+			s2.room = roomsNotSeen.get(0).name;
+		else if(roomsNotSeen.size() > 1)
+			s2.room = roomsNotSeen.get(r.nextInt(roomsNotSeen.size())).name;
+		
+		if(weaponsNotSeen.size() == 1)
+			s2.weapon = weaponsNotSeen.get(0).name;
+		else if(weaponsNotSeen.size() > 1)
+			s2.weapon = weaponsNotSeen.get(r.nextInt(weaponsNotSeen.size())).name;
+		return s2;
 	}
 	
 	

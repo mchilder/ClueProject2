@@ -50,8 +50,10 @@ public class ComputerMakeSuggestion {
 		Boolean foundCard = false;
 		for(Card c1 : c.Cards) {
 			if(!c1.name.equals(s.person) && !c1.name.equals(s.weapon) && !c1.name.equals(s.room)) {
-				if(c1.type == CardType.PERSON && !foundCard)
+				if(c1.type == CardType.PERSON && !foundCard) {
 					otherPerson = c1.name;
+					foundCard = true;
+				}
 				else
 					c.ComputerPlayers.get(0).seenCards.add(c1);
 			}

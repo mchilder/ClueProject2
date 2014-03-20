@@ -6,7 +6,11 @@ public class Solution {
 		this.weapon = s.weapon;
 		this.person = s.person;
 	}
-	public Solution() {};
+	public Solution() {
+		room = "";
+		weapon = "";
+		person = "";
+	};
 	public String room;
 	public String weapon;
 	public String person;
