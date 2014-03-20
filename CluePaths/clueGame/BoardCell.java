@@ -12,6 +12,7 @@ public abstract class BoardCell {
 	public boolean isDoorway() {
 		return false;
 	}
-	int index;
+	public int index;
+	
 	// public abstract void draw();
 }

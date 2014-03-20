@@ -155,10 +155,12 @@ public class ClueGame {
 			if(t.isDoorway() && t.index != lastLocation)
 				doors.add(t);
 		}
-		if(doors.size() > 0) {
-			return doors.get(r.nextInt(doors.size()-1));
+		if(doors.size() == 1)
+			return doors.get(0);
+		if(doors.size() > 1) {
+			return doors.get(r.nextInt(doors.size()));
 		}
-		return targets.get(r.nextInt(targets.size()-1));
+		return targets.get(r.nextInt(targets.size()));
 	}
 	
 	public Boolean makeAccusation(Solution check) {
