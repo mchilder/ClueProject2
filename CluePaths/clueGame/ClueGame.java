@@ -148,6 +148,20 @@ public class ClueGame {
 		}
 	}
 	
+	public String disproveSuggestion(Solution s1, Boolean isHuman) {
+		for(Player p : ComputerPlayers) {
+			for(Card c : p.myCards) {
+				if(c.name == s1.person || c.name == s1.room || c.name == s1.weapon)
+					return c.name;
+			}
+		}
+		for(Card c : Human.myCards) {
+			if(!isHuman && c.name == s1.person || c.name == s1.room || c.name == s1.weapon)
+				return c.name;
+		}
+		return "";
+	}
+	
 	public BoardCell selectTarget(int lastLocation, ArrayList<BoardCell> targets) {
 		Random r = new Random();
 		ArrayList<BoardCell> doors = new ArrayList<BoardCell>();
