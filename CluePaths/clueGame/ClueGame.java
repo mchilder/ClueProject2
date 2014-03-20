@@ -148,18 +148,24 @@ public class ClueGame {
 		}
 	}
 	
-	public String disproveSuggestion(Solution s1, Boolean isHuman) {
-		for(Player p : ComputerPlayers) {
-			for(Card c : p.myCards) {
-				if(c.name == s1.person || c.name == s1.room || c.name == s1.weapon)
-					return c.name;
+	public Card disproveSuggestion(Solution s1, int turn) {
+		for(int i = turn+1; i < turn + 6; i ++) {
+			int check = i % 6;
+			if(check == 5) {
+				Collections.shuffle(Human.myCards);
+				for(Card c : Human.myCards) {
+					if(c.name.equals(s1.person) || c.name.equals(s1.room) || c.name.equals(s1.weapon))
+						return c;
+				}
+			} else {
+				Collections.shuffle(ComputerPlayers.get(check).myCards);
+				for(Card c : ComputerPlayers.get(check).myCards) {
+					if(c.name.equals(s1.person) || c.name.equals(s1.room) || c.name.equals(s1.weapon))
+						return c;
+				}
 			}
 		}
-		for(Card c : Human.myCards) {
-			if(!isHuman && c.name == s1.person || c.name == s1.room || c.name == s1.weapon)
-				return c.name;
-		}
-		return "";
+		return new Card();
 	}
 	
 	public BoardCell selectTarget(int lastLocation, ArrayList<BoardCell> targets) {
