@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import clueGame.Card.CardType;
 
@@ -146,6 +147,20 @@ public class ClueGame {
 			}
 		}
 	}
+	
+	public BoardCell selectTarget(int lastLocation, ArrayList<BoardCell> targets) {
+		Random r = new Random();
+		ArrayList<BoardCell> doors = new ArrayList<BoardCell>();
+		for(BoardCell t : targets) {
+			if(t.isDoorway() && t.index != lastLocation)
+				doors.add(t);
+		}
+		if(doors.size() > 0) {
+			return doors.get(r.nextInt(doors.size()-1));
+		}
+		return targets.get(r.nextInt(targets.size()-1));
+	}
+	
 	public Boolean makeAccusation(Solution check) {
 		return (check.person == s.person && check.weapon == s.weapon && check.room == s.room);
 	}

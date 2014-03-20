@@ -105,9 +105,13 @@ public class Board {
     	  }
     	  
     	  if (this.rooms.containsKey(s.charAt(0))) {
-              this.cells.add(new RoomCell(s));
+    		  BoardCell temp  = new RoomCell(s);
+    		  temp.index = this.cells.size();
+              this.cells.add(temp);
            } else if (s.charAt(0) == WALKWAY_CHAR){
-              this.cells.add(new WalkwayCell());
+        	   BoardCell temp  = new WalkwayCell();
+     		  temp.index = this.cells.size();
+              this.cells.add(temp);
            }else throw new BadConfigFormatException("Bad config file: an unrecognized room "+ s +
         		   "was attempted to load into rooms");
       }
@@ -239,19 +243,21 @@ public class Board {
   }
   
   public void calcTargets(int y, int x, int length) {
-    if (x >= 0 && x < this.numColumns && y >= 0 && y < this.numRows) { 
+	  calcTargets(calcIndex(y,x), length);
+  }
+  
+  public void calcTargets(int index, int length) {
+    if (index >= 0 && index <= this.numColumns*this.numRows) { 
       // Clear the targets and set the starting point.
       this.current_targets = new HashSet<BoardCell>();
-      int id = this.calcIndex(y, x);
-      
       // Initialize the "visited" array.
       for (int i = 0; i < this.visited.length; i += 1) {
         this.visited[i] = false;
       }
-      this.visited[id] = true;
+      this.visited[index] = true;
       
       // Begin pathfinding.
-      this.pathRecurse(id, length);
+      this.pathRecurse(index, length);
     }
   }
   

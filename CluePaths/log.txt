@@ -1,0 +1,35 @@
+commit c0b07ad1903a49964895e7e482742c46a6d7d765
+Author: Matthew Childers <mchilder@mymail.mines.edu>
+Date:   Wed Mar 19 16:41:05 2014 -0600
+
+    Passing Accusation tests
+
+commit 3693eb4b72edae1454259eabb9cf147ed47a0704
+Author: Matthew Childers <mchilder@mymail.mines.edu>
+Date:   Tue Mar 18 17:33:15 2014 -0600
+
+    Passing deal cards test
+
+commit 3235d4df006b3b7bc5fb5acb9515d06232981ff2
+Author: Matthew Childers <mchilder@mymail.mines.edu>
+Date:   Tue Mar 18 17:02:50 2014 -0600
+
+    Passing load deck test
+
+commit 268fde118635b09042bfc66e799019dfb6aefd9e
+Author: Matthew Childers <mchilder@mymail.mines.edu>
+Date:   Tue Mar 18 16:43:31 2014 -0600
+
+    Passing Load Player test
+
+commit 5cfad0e85dd8e20bcd335c0e843e646f931a2f31
+Author: Matthew Childers <mchilder@mymail.mines.edu>
+Date:   Tue Mar 18 16:38:14 2014 -0600
+
+    Added failing tests and new classes
+
+commit bc7215c5b2e8abe14026c8fada29c9b636e64ec3
+Author: Matthew Childers <mchilder@mymail.mines.edu>
+Date:   Tue Mar 18 15:29:37 2014 -0600
+
+    Adding files

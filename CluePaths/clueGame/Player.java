@@ -7,4 +7,5 @@ public abstract class Player {
 	public String color;
 	public int StartingLocation;
 	public List<Card> myCards;
+	public int lastLocation;
 }
