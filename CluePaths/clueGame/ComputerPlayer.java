@@ -1,5 +1,7 @@
 package clueGame;
 
-public class ComputerPlayer extends Player {
+import java.util.List;
 
+public class ComputerPlayer extends Player {
+	
 }

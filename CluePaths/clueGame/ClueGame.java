@@ -73,6 +73,7 @@ public class ClueGame {
 	    		temp.name = inputs[0];
 	    		temp.color = inputs[1];
 	    		temp.StartingLocation = Integer.parseInt(inputs[2]);
+	    		temp.seenCards = new ArrayList<Card>();
 	    		ComputerPlayers.add(temp);
 	    	}
 	    	count=count+1;
@@ -139,14 +140,21 @@ public class ClueGame {
 				s.person = a.name;
 				p = true;
 			} else {
-				if(index%6 == 5)
+				if(index%6 == 5) {
 					Human.myCards.add(a);
-				else
+					Human.seenCards.add(a);
+				}
+				else {
 					ComputerPlayers.get(index%6).myCards.add(a);
+					ComputerPlayers.get(index%6).seenCards.add(a);
+				}
+				
 				index++;
 			}
 		}
 	}
+	
+	
 	
 	public Card disproveSuggestion(Solution s1, int turn) {
 		for(int i = turn+1; i < turn + 6; i ++) {

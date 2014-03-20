@@ -8,4 +8,6 @@ public abstract class Player {
 	public int StartingLocation;
 	public List<Card> myCards;
 	public int lastLocation;
+	public List<Card> seenCards;
+	
 }
