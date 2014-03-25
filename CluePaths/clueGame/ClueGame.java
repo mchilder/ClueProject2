@@ -15,7 +15,8 @@ import clueGame.Card.CardType;
 public class ClueGame {
 	public static Solution s;
 	public static List<Player> ComputerPlayers;
-	public static List<String> Weapons;
+	public static ArrayList<String> Weapons;
+	public ArrayList<String> personNames;
 	public static List<Card> Cards;
 	public static Player Human;
 	public static Board b;
@@ -53,6 +54,7 @@ public class ClueGame {
 	}
 	
 	public void loadPlayerConfig() throws FileNotFoundException {
+		personNames = new ArrayList<String>();
 		FileReader reader = new FileReader(this.nameConfigFile);
 	    Scanner in = new Scanner(reader);
 	    int count = 0;
@@ -62,6 +64,7 @@ public class ClueGame {
 	    while (in.hasNext()) {
 	    	String line = in.nextLine();
 	    	String[] inputs = line.split(",");
+	    	personNames.add(inputs[0]);
 	    	if(count == 0) {
 	    		temp = new HumanPlayer();
 	    		temp.name = inputs[0];

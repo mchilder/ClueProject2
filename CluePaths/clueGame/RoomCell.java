@@ -1,5 +1,10 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
 public class RoomCell extends BoardCell {
 	public enum DoorDirection {
 		UP, DOWN, LEFT, RIGHT, NONE
@@ -48,5 +53,11 @@ public class RoomCell extends BoardCell {
 		return initial;
 	}
 
-	// public void draw() {}
+	@Override
+	public void draw(Graphics g, Board t) {
+		  int x = (this.index%t.getNumColumns())*35;
+		  int y = ( this.index - this.index%t.getNumColumns() )/t.getNumColumns()*35;
+		  g.setColor(Color.gray);
+		  g.fillRect(x, y, 50, 50);
+	}
 }

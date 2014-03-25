@@ -1,5 +1,9 @@
 package clueGame;
 
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
 public abstract class BoardCell {
   public boolean isWalkway() {
 		return false;
@@ -14,5 +18,5 @@ public abstract class BoardCell {
 	}
 	public int index;
 	
-	// public abstract void draw();
+	public abstract void draw(Graphics g, Board t);
 }
